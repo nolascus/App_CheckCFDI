@@ -4,4 +4,6 @@ El webservice esta ubicado en https://consultaqr.facturaelectronica.sat.gob.mx/C
 
 La documentacion para consumir el webservice esta en ftp://ftp2.sat.gob.mx/asistencia_servicio_ftp/publicaciones/cfdi/WS_ConsultaCFDI.pdf
 
-El codigo fue desarrollado en Visual Studio 2010, usando el dotnetFramework 4.0.
+El codigo fue desarrollado en Visual Studio 2010, usando el dotnetFramework 4.0..
+
+Si requieres de una version compilada la encontraras en http://nolascus.com/webservicevalidarcfdisat/
