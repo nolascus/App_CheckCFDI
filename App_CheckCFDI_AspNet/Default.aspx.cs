@@ -44,55 +44,58 @@ namespace App_CheckCFDI_AspNet
                                 Comprobante comprobante = new Comprobante();
                                 cont++;
                                 string Xmlstring;
-                                MemoryStream memory = new MemoryStream();
-                                entrada.Extract(memory);
-                                Xmlstring = Encoding.UTF8.GetString(memory.ToArray());
-                                Xmlstring = Xmlstring.Substring(1);
-                                nuevoElemento.XML_Nombre_Archivo = Path.GetFileName(entrada.FileName);
-                                var serializer = new XmlSerializer(typeof(Comprobante));
-                                try
+                                if (entrada.FileName.ToLower().Contains(".xml"))
                                 {
-                                    using (TextReader lector = new StringReader(Xmlstring))
+                                    MemoryStream memory = new MemoryStream();
+                                    entrada.Extract(memory);
+                                    Xmlstring = Encoding.UTF8.GetString(memory.ToArray());
+                                    Xmlstring = Xmlstring.Substring(1);
+                                    nuevoElemento.XML_Nombre_Archivo = Path.GetFileName(entrada.FileName);
+                                    var serializer = new XmlSerializer(typeof(Comprobante));
+                                    try
                                     {
-                                        comprobante = (Comprobante)serializer.Deserialize(lector);
+                                        using (TextReader lector = new StringReader(Xmlstring))
+                                        {
+                                            comprobante = (Comprobante)serializer.Deserialize(lector);
+                                        }
+                                        nuevoElemento.XML_RFC_Emisor = comprobante.Emisor.rfc;
+                                        nuevoElemento.XML_RFC_Receptor = comprobante.Receptor.rfc;
+                                        nuevoElemento.XML_Total = comprobante.total;
+                                        nuevoElemento.XML_Esquema_CFDI = "Esquema Valido";
                                     }
-                                    nuevoElemento.XML_RFC_Emisor = comprobante.Emisor.rfc;
-                                    nuevoElemento.XML_RFC_Receptor = comprobante.Receptor.rfc;
-                                    nuevoElemento.XML_Total = comprobante.total;
-                                    nuevoElemento.XML_Esquema_CFDI = "Esquema Valido";
+                                    catch (Exception ex)
+                                    {
+                                        nuevoElemento.XML_Esquema_CFDI = "Esquema Invalido";
+                                        nuevoElemento.XML_RFC_Emisor = "";
+                                        nuevoElemento.XML_RFC_Receptor = "";
+                                        nuevoElemento.XML_Status = "INVALIDO!!!";
+                                        nuevoElemento.XML_Total = 0.00m;
+                                        nuevoElemento.XML_UUID = "";
+                                        lblSalida.Text = lblSalida.Text + "Error :" + ex.Message;
+                                    }
+                                    try
+                                    {
+                                        var xdoc = XDocument.Parse(Xmlstring);
+                                        var timbreFiscal = (from item in xdoc.Descendants()
+                                                            where item.Name.LocalName == "TimbreFiscalDigital"
+                                                            select item).First();
+                                        TimbreFiscalDigital timbreXMLComplemento = new TimbreFiscalDigital();
+                                        timbreXMLComplemento.FechaTimbrado = Convert.ToDateTime(timbreFiscal.Attribute("FechaTimbrado").Value);
+                                        timbreXMLComplemento.UUID = timbreFiscal.Attribute("UUID").Value;
+                                        timbreXMLComplemento.noCertificadoSAT = timbreFiscal.Attribute("noCertificadoSAT").Value;
+                                        timbreXMLComplemento.selloCFD = timbreFiscal.Attribute("selloCFD").Value;
+                                        timbreXMLComplemento.selloSAT = timbreFiscal.Attribute("selloSAT").Value;
+                                        timbreXMLComplemento.version = timbreFiscal.Attribute("version").Value;
+                                        nuevoElemento.XML_UUID = timbreXMLComplemento.UUID.ToLower();
+                                        nuevoElemento.XML_Complemento_TFD = "Complemento Valido";
+                                    }
+                                    catch
+                                    {
+                                        nuevoElemento.XML_Complemento_TFD = "Complemento Invalido";
+                                    }
+                                    memory.Dispose();
+                                    ArchivosXML.Add(nuevoElemento);
                                 }
-                                catch (Exception ex)
-                                {
-                                    nuevoElemento.XML_Esquema_CFDI = "Esquema Invalido";
-                                    nuevoElemento.XML_RFC_Emisor = "";
-                                    nuevoElemento.XML_RFC_Receptor = "";
-                                    nuevoElemento.XML_Status = "INVALIDO!!!";
-                                    nuevoElemento.XML_Total = 0.00m;
-                                    nuevoElemento.XML_UUID = "";
-                                    lblSalida.Text = lblSalida.Text + "Error :" + ex.Message;
-                                }
-                                try
-                                {
-                                    var xdoc = XDocument.Parse(Xmlstring);
-                                    var timbreFiscal = (from item in xdoc.Descendants()
-                                                        where item.Name.LocalName == "TimbreFiscalDigital"
-                                                        select item).First();
-                                    TimbreFiscalDigital timbreXMLComplemento = new TimbreFiscalDigital();
-                                    timbreXMLComplemento.FechaTimbrado = Convert.ToDateTime(timbreFiscal.Attribute("FechaTimbrado").Value);
-                                    timbreXMLComplemento.UUID = timbreFiscal.Attribute("UUID").Value;
-                                    timbreXMLComplemento.noCertificadoSAT = timbreFiscal.Attribute("noCertificadoSAT").Value;
-                                    timbreXMLComplemento.selloCFD = timbreFiscal.Attribute("selloCFD").Value;
-                                    timbreXMLComplemento.selloSAT = timbreFiscal.Attribute("selloSAT").Value;
-                                    timbreXMLComplemento.version = timbreFiscal.Attribute("version").Value;
-                                    nuevoElemento.XML_UUID = timbreXMLComplemento.UUID.ToLower();
-                                    nuevoElemento.XML_Complemento_TFD = "Complemento Valido";
-                                }
-                                catch
-                                {
-                                    nuevoElemento.XML_Complemento_TFD = "Complemento Invalido";
-                                }
-                                memory.Dispose();
-                                ArchivosXML.Add(nuevoElemento);
                             }
                             lblSalida.Text = lblSalida.Text + "Numero de XML en archivo ZIP:"+cont+"\n";
                         }
