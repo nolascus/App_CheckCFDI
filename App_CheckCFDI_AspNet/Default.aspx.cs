@@ -33,6 +33,7 @@ namespace App_CheckCFDI_AspNet
                     XMLZipFile.SaveAs(path + XMLZipFile.FileName);
                     if (File.Exists(myFileNameLocal) && myFileNameLocal.Contains(".zip"))
                     {
+                        lblSalida.Text = lblSalida.Text + "Procesando Archivo :"+myFileNameLocal+"\n";
                         ArchivosXML.Clear();
                         using (ZipFile zip = ZipFile.Read(myFileNameLocal))
                         {

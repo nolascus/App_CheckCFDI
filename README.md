@@ -6,4 +6,8 @@ La documentacion para consumir el webservice esta en ftp://ftp2.sat.gob.mx/asist
 
 El codigo fue desarrollado en Visual Studio 2010, usando el dotnetFramework 4.0..
 
+Actualizacion : Se ha agregado un proyecto en ASP NET que procesa un archivo zip, con xml y devuelve el resultado; se ha utilizado la libreria dotnetzip (http://dotnetzip.codeplex.com) para el manejo de zips.
+
 Si requieres de una version compilada la encontraras en http://nolascus.com/webservicevalidarcfdisat/
+
+Saludos!!!
