@@ -1,0 +1,7 @@
+K:\Github\App_CheckCFDI\App_CheckCFDI_AspNet\bin\App_CheckCFDI_AspNet.dll
+K:\Github\App_CheckCFDI\App_CheckCFDI_AspNet\bin\App_CheckCFDI_AspNet.pdb
+K:\Github\App_CheckCFDI\App_CheckCFDI_AspNet\obj\Release\App_CheckCFDI_AspNet.dll
+K:\Github\App_CheckCFDI\App_CheckCFDI_AspNet\obj\Release\App_CheckCFDI_AspNet.pdb
+K:\Github\App_CheckCFDI\App_CheckCFDI_AspNet\bin\Ionic.Zip.dll
+K:\Github\App_CheckCFDI\App_CheckCFDI_AspNet\bin\Ionic.Zip.xml
+K:\Github\App_CheckCFDI\App_CheckCFDI_AspNet\obj\Release\App_CheckCFDI_AspNet.csprojResolveAssemblyReference.cache

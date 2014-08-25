@@ -1,0 +1,11 @@
+K:\Github\App_CheckCFDI\App_CheckCFDI\bin\Release\app.config
+K:\Github\App_CheckCFDI\App_CheckCFDI\bin\Release\App_CheckCFDI.exe.config
+K:\Github\App_CheckCFDI\App_CheckCFDI\bin\Release\App_CheckCFDI.exe
+K:\Github\App_CheckCFDI\App_CheckCFDI\bin\Release\App_CheckCFDI.pdb
+K:\Github\App_CheckCFDI\App_CheckCFDI\obj\Release\App_CheckCFDI.Acerca.resources
+K:\Github\App_CheckCFDI\App_CheckCFDI\obj\Release\App_CheckCFDI.frmFAQ.resources
+K:\Github\App_CheckCFDI\App_CheckCFDI\obj\Release\App_CheckCFDI.Main.resources
+K:\Github\App_CheckCFDI\App_CheckCFDI\obj\Release\App_CheckCFDI.Properties.Resources.resources
+K:\Github\App_CheckCFDI\App_CheckCFDI\obj\Release\App_CheckCFDI_Win32.csproj.GenerateResource.Cache
+K:\Github\App_CheckCFDI\App_CheckCFDI\obj\Release\App_CheckCFDI.exe
+K:\Github\App_CheckCFDI\App_CheckCFDI\obj\Release\App_CheckCFDI.pdb
