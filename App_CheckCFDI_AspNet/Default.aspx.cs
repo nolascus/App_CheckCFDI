@@ -49,6 +49,7 @@ namespace App_CheckCFDI_AspNet
                                     MemoryStream memory = new MemoryStream();
                                     entrada.Extract(memory);
                                     Xmlstring = Encoding.UTF8.GetString(memory.ToArray());
+                                    // No tengo idea, pero la libreria le agrega un caracter al stream... hay que investigar
                                     Xmlstring = Xmlstring.Substring(1);
                                     nuevoElemento.XML_Nombre_Archivo = Path.GetFileName(entrada.FileName);
                                     var serializer = new XmlSerializer(typeof(Comprobante));
